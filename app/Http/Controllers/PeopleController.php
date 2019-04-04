@@ -63,7 +63,7 @@ class PeopleController extends Controller
         $url = Storage::url($filename);
         $people->image = $url;
         $people->save(); 
-
+        return redirect()->back();
     }
 
     /**
@@ -85,7 +85,9 @@ class PeopleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $peoples = People::find($id);
+       
+        return view('editpeople')->with('peoples',$peoples);
     }
 
     /**
@@ -97,7 +99,16 @@ class PeopleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $people = People::find($id);
+        $people->name = $request->peoplename;
+        $people->address = $request->address;
+        $date=$request->date;
+        $people->joiningdate = Carbon::today()->addMonths($date);
+        $filename=request()->file('image')->store('public');
+        $url = Storage::url($filename);
+        $people->image = $url;
+        $people->save(); 
+        return redirect()->action('PeopleController@index',['id'=>'all']);
     }
 
     /**
@@ -108,7 +119,9 @@ class PeopleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $people = People::where('id',$id)->delete();
+        
+        return redirect()->back();
     }
 
     public function try(){

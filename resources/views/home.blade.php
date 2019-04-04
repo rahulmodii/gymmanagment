@@ -30,7 +30,7 @@
             <td>{{$gym->details}}</td>
             <td><a href="/edit/{{$gym->id}}">update</a></td>
             <td><a href="/deletegym/{{$gym->id}}">delete</a></td>
-                    
+            <td><a href="/people/{{$gym->id}}/all">view people</a></td>        
                 </tr> 
             @endforeach
             @else

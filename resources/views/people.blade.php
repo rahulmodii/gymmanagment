@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<form action="" method="post" enctype="multipart/form-data">
+<form action="/people" method="post" enctype="multipart/form-data">
     @csrf
     <pre>
     NAME:<input type="text" name="peoplename" /><br>
@@ -31,6 +31,7 @@
                 <td>last fees date</td>
                 <td>edit</td>
                 <td>delete</td>
+               
         </tr>
         @foreach ($peoples as $people)
                 
@@ -39,8 +40,9 @@
                                 <td> {{$people->address}}</td>
                                 <td><img src="{{asset($people->image)}}" height="100px" width="100px"></td>
                                 <td>{{$people->joiningdate}}</td>
-                                <td><a href="/edit">edit</a></td>
-                                <td><a href="/delete">delete</a></td>
+                                <td><a href="/edit/{{$people->id}}">edit</a></td>
+                                <td><a href="/deletepeople/{{$people->id}}">delete</a></td>
+                                
 
                         </tr>
                 
