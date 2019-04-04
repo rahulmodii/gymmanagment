@@ -22,8 +22,8 @@
     <input type="submit"/>
     </pre>
 </form>
-<h1>get the list of the people who are late for fees <a href="/people/fee">fee</a></h1>
-<h1>get the list of all the people <a href="/people/all">all</a></h1>
+<h1>get the list of the people who are late for fees <a href="/people/fee/{{$gymids}}">fee</a></h1>
+<h1>get the list of all the people <a href="/people/all/{{$gymids}}">all</a></h1>
 <table border="1" align="center">
         <tr>
                 <td>name</td>

@@ -14,12 +14,13 @@ class PeopleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index($id,$gymids)
     {   
+        
          $diff=Carbon::now()->subDays(5)->toDateString();
          $current=Carbon::now()->toDateString();
         if($id == 'all'){
-            $peoples=People::all();
+            $peoples=People::where('gymid',$gymids)->get();
         }
         elseif ($id == 'fee') {
             $peoples= People::whereBetween('joiningdate',array($diff,$current))->get();
@@ -30,9 +31,10 @@ class PeopleController extends Controller
         }
         
 
-        $gyms= AddGyms::all();  
-        return view('people')->with('gyms',$gyms)->with('peoples',$peoples);
-
+        $gyms= AddGyms::all();
+          
+        return view('people')->with('gyms',$gyms)->with('peoples',$peoples)->with('gymids',$gymids);
+        
     }
 
     /**
@@ -63,7 +65,7 @@ class PeopleController extends Controller
         $url = Storage::url($filename);
         $people->image = $url;
         $people->save(); 
-        return redirect()->back();
+        return redirect()->back(); 
     }
 
     /**
@@ -86,8 +88,9 @@ class PeopleController extends Controller
     public function edit($id)
     {
         $peoples = People::find($id);
-       
         return view('editpeople')->with('peoples',$peoples);
+        
+        
     }
 
     /**
@@ -103,16 +106,20 @@ class PeopleController extends Controller
         $people->name = $request->peoplename;
         $people->address = $request->address;
         $date=$request->date;
-        $people->joiningdate = Carbon::today()->addMonths($date);
+        if($request->date > 0){
+              
+            $people->joiningdate = Carbon::today()->addMonths($date);
+        }
+        
+        // dd($people);
         if($request->image){
         $filename=request()->file('image')->store('public');
         $url = Storage::url($filename);
         $people->image = $url;
         }
-        
         $people->save(); 
-        return redirect()->action('PeopleController@index',['id'=>'all']);
-    }
+        echo '<script type="text/javascript">' , 'history.go(-2)' ,'</script>';    
+    }   
 
     /**
      * Remove the specified resource from storage.
@@ -128,7 +135,7 @@ class PeopleController extends Controller
     }
 
     public function try(){
-
+        return view('');
     }
     
 }
