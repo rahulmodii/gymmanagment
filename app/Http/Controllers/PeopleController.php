@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\AddGyms;
-use App\
+use App\People;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 class PeopleController extends Controller
 {
     /**
@@ -36,8 +38,17 @@ class PeopleController extends Controller
      */
     public function store(Request $request)
     {   
+        $people = new People;
+        $people->name = $request->peoplename;
+        $people->address = $request->address;
+        $people->gymid = $request->gymid;
+        $date=$request->date;
+        $people->joiningdate = Carbon::today()->addMonths($date);
+        $filename=request()->file('image')->store('public');
+        $url = Storage::url($filename);
+        $people->image = $url;
+        $people->save(); 
 
-        dd($request->all());
     }
 
     /**
