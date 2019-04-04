@@ -104,9 +104,12 @@ class PeopleController extends Controller
         $people->address = $request->address;
         $date=$request->date;
         $people->joiningdate = Carbon::today()->addMonths($date);
+        if($request->image){
         $filename=request()->file('image')->store('public');
         $url = Storage::url($filename);
         $people->image = $url;
+        }
+        
         $people->save(); 
         return redirect()->action('PeopleController@index',['id'=>'all']);
     }
