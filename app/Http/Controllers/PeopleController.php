@@ -14,13 +14,22 @@ class PeopleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {   
          $diff=Carbon::now()->subDays(5)->toDateString();
          $current=Carbon::now()->toDateString();
-        //  dd($current);
-        //  dd($diff);
-        $peoples= People::where('joiningdate',[$current,$diff])->get();
+        if($id == 'all'){
+            $peoples=People::all();
+        }
+        elseif ($id == 'fee') {
+            $peoples= People::whereBetween('joiningdate',array($diff,$current))->get();
+        }
+
+        else {
+            $peoples=People::all();
+        }
+        
+
         $gyms= AddGyms::all();  
         return view('people')->with('gyms',$gyms)->with('peoples',$peoples);
 

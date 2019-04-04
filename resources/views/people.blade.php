@@ -21,15 +21,32 @@
     <input type="submit"/>
     </pre>
 </form>
-
+<h1>get the list of the people who are late for fees <a href="/people/fee">fee</a></h1>
+<h1>get the list of all the people <a href="/people/all">all</a></h1>
+<table border="1" align="center">
+        <tr>
+                <td>name</td>
+                <td>address</td>
+                <td>image</td>
+                <td>last fees date</td>
+                <td>edit</td>
+                <td>delete</td>
+        </tr>
         @foreach ($peoples as $people)
-                {{$people->name}}
-                {{$people->address}}
-                <img src="{{asset($people->image)}}" height="100px" width="100px">
-                {{$people->gymid}}
-                {{$people->joiningdate}}<br>
+                
+                        <tr>
+                                <td> {{$people->name}}</td>
+                                <td> {{$people->address}}</td>
+                                <td><img src="{{asset($people->image)}}" height="100px" width="100px"></td>
+                                <td>{{$people->joiningdate}}</td>
+                                <td><a href="/edit">edit</a></td>
+                                <td><a href="/delete">delete</a></td>
+
+                        </tr>
+                
+                
 
         @endforeach
-
+</table>
 
 @endsection

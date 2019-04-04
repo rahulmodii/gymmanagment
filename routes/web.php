@@ -26,6 +26,6 @@ Route::post('/updategyms/{id}','GymController@update');
 Route::get('/deletegym/{id}','GymController@destroy');
 Route::get('/restore','GymController@restoregym');
 // people routes
-Route::get('/people','PeopleController@index');
+Route::get('/people/{id}','PeopleController@index');
 Route::post('/people','PeopleController@store');
 Route::get('/try','PeopleController@try');
