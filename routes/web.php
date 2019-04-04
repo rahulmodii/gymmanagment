@@ -28,3 +28,4 @@ Route::get('/restore','GymController@restoregym');
 // people routes
 Route::get('/people','PeopleController@index');
 Route::post('/people','PeopleController@store');
+Route::get('/try','PeopleController@try');

@@ -22,4 +22,14 @@
     </pre>
 </form>
 
+        @foreach ($peoples as $people)
+                {{$people->name}}
+                {{$people->address}}
+                <img src="{{asset($people->image)}}" height="100px" width="100px">
+                {{$people->gymid}}
+                {{$people->joiningdate}}<br>
+
+        @endforeach
+
+
 @endsection

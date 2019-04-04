@@ -15,9 +15,15 @@ class PeopleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $gyms= AddGyms::all();
-        return view('people')->with('gyms',$gyms);
+    {   
+         $diff=Carbon::now()->subDays(5)->toDateString();
+         $current=Carbon::now()->toDateString();
+        //  dd($current);
+        //  dd($diff);
+        $peoples= People::where('joiningdate',[$current,$diff])->get();
+        $gyms= AddGyms::all();  
+        return view('people')->with('gyms',$gyms)->with('peoples',$peoples);
+
     }
 
     /**
@@ -95,4 +101,9 @@ class PeopleController extends Controller
     {
         //
     }
+
+    public function try(){
+
+    }
+    
 }
