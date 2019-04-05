@@ -100,7 +100,7 @@ class PeopleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id,$gymids)
     {
         $people = People::find($id);
         $people->name = $request->peoplename;
@@ -118,7 +118,7 @@ class PeopleController extends Controller
         $people->image = $url;
         }
         $people->save(); 
-        echo '<script type="text/javascript">' , 'history.go(-2)' ,'</script>';    
+        return redirect()->action('PeopleController@index',['id'=>'all','gymid'=>$gymids]);    
     }   
 
     /**
@@ -135,7 +135,7 @@ class PeopleController extends Controller
     }
 
     public function try(){
-        return view('');
+        return redirect()->back();
     }
     
 }

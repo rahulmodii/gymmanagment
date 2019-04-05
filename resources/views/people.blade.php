@@ -42,9 +42,7 @@
                                 <td><img src="{{asset($people->image)}}" height="100px" width="100px"></td>
                                 <td>{{$people->joiningdate}}</td>
                                 <td><a href="/edit/{{$people->id}}">edit</a></td>
-                                <td><a href="/deletepeople/{{$people->id}}">delete</a></td>
-                                
-
+                                <td><a href="/deletepeople/{{$people->id}}">delete</a></td>                              
                         </tr>
                 
                 

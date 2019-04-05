@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<form action="/updatepeople/{{$peoples->id}}" method="post" enctype="multipart/form-data">
+<form action="/updatepeople/{{$peoples->id}}/{{$peoples->gymid}}" method="post" enctype="multipart/form-data">
     @csrf
     <pre>
     NAME:<input type="text" name="peoplename" value="{{$peoples->name}}" /><br>

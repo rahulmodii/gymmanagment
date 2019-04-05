@@ -31,4 +31,4 @@ Route::post('/people','PeopleController@store');
 Route::get('/try','PeopleController@try');
 Route::get('/edit/{id}','PeopleController@edit');
 Route::get('/deletepeople/{id}','PeopleController@destroy');
-Route::post('/updatepeople/{id}','PeopleController@update');
+Route::post('/updatepeople/{id}/{gymids}','PeopleController@update');
